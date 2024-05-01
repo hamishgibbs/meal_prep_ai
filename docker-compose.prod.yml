@@ -5,3 +5,8 @@ services:
     container_name: meal_prep_ai
     ports:
       - "8022:8022"
+    volumes:
+      - meal_prep_ai_data:/app/data
+
+volumes:
+  meal_prep_ai_data:
