@@ -37,9 +37,8 @@ class MealPlan(BaseModel):
     recipes: List[str]
     shopping_list: List[str]
 
-RECIPES_FILE = 'recipes.json'
-PURCHASE_FILE = 'purchase_history.json'
-MEAL_PLAN_FILE = 'meal_plan.json'
+RECIPES_FILE = 'data/recipes.json'
+MEAL_PLAN_FILE = 'data/meal_plan.json'
 
 security = HTTPBearer()
 

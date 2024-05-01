@@ -14,7 +14,7 @@ headers = {
 
 def test_add_recipe_reaction():
     # Ensure the file is empty/clean before the test
-    with open('recipes.json', 'w') as file:
+    with open('data/recipes.json', 'w') as file:
         json.dump([], file)
     
     recipe1 = {

@@ -12,7 +12,7 @@ headers = {
 }
 
 def test_add_recipes():
-    with open('recipes.json', 'w') as file:
+    with open('data/recipes.json', 'w') as file:
         json.dump([], file)
 
     recipe1 = {
@@ -46,7 +46,7 @@ def test_add_recipes():
     assert response.json() == [recipe1, recipe2]
 
 def test_remove_recipe():
-    with open('recipes.json', 'w') as file:
+    with open('data/recipes.json', 'w') as file:
         json.dump([], file)
 
     recipe1 = {
