@@ -1,6 +1,4 @@
 __pycache__
 .DS_Store
 .pytest_cache
-meal_plan.json
-purchase_history.json
-recipes.json
+data/*

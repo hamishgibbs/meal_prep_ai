@@ -14,7 +14,7 @@ headers = {
 
 def test_add_meal_plan():
 
-    with open('meal_plan.json', 'w') as file:
+    with open('data/meal_plan.json', 'w') as file:
         json.dump([], file)
 
     meal_plan = {
