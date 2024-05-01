@@ -31,25 +31,6 @@ class Recipe(BaseModel):
             "ingredients": [ingredient.model_dump() for ingredient in self.ingredients],
             "reactions": [reaction.model_dump() for reaction in self.reactions]
         }
-    
-class Product(BaseModel):
-    name: str
-    quantity: str
-
-    class Config:
-        extra = "ignore"
-
-class Purchase(BaseModel):
-    product: List[Product]
-
-    class Config:
-        extra = "ignore"
-
-class PurchaseData(BaseModel):
-    Purchase: List[List[Purchase]]
-
-    class Config:
-        extra = "ignore"
 
 class MealPlan(BaseModel):
     date: datetime
@@ -123,32 +104,6 @@ async def remove_recipe(recipe_name: str, token: str = Depends(authenticate)):
         json.dump(updated_recipes, file, indent=4)
 
     return {"message": f"Recipe '{recipe_name}' removed successfully"}
-
-@app.post("/add_purchase_history")
-async def add_purchase_history(data: PurchaseData, token: str = Depends(authenticate)):
-    
-    purchase_frequency = {}
-
-    for purchase in data.Purchase[0]:
-        for product in purchase.product:
-            if product.name in purchase_frequency:
-                purchase_frequency[product.name] += product.quantity
-            else:
-                purchase_frequency[product.name] = product.quantity
-    
-    with open(PURCHASE_FILE, 'w') as file:
-        json.dump(purchase_frequency, file, indent=4)
-    
-    return {"message": "Purchase history added successfully"}
-
-@app.get("/purchase_history")
-async def get_purchase_history(token: str = Depends(authenticate)):
-    try:
-        with open(PURCHASE_FILE, 'r') as file:
-            purchase_history = json.load(file)
-        return purchase_history
-    except FileNotFoundError:
-        return {}
 
 @app.post("/add_meal_plan")
 async def add_meal_plan(meal_plan: MealPlan, token: str = Depends(authenticate)):
